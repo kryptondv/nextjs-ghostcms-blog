@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { loadComments } from '../../utils/disqs';
+import CommentsSection from '../components/postPage/commentsSection';
 
 import PostContent from '../components/postPage/postContent';
 
@@ -17,30 +16,20 @@ interface Props {
 }
 
 const Post: React.FC<Props> = props => {
-  const [comments, setComments] = useState(false);
-
   const post = props.posts.posts[0];
-
   const router = useRouter();
+
   if (router.isFallback) {
     return <h2>Loading...</h2>;
   }
-
-  useEffect(() => {
-    comments && loadComments(post);
-  }, [comments]);
 
   return (
     <div>
       <Link href="/">
         <a>Go back</a>
       </Link>
-      <PostContent title={post.title} html={post.html}/>
-      
-      {!comments && (
-        <button onClick={() => setComments(true)}>Load Comments</button>
-      )}
-      <div id="disqus_thread"></div>
+      <PostContent title={post.title} html={post.html} />
+      <CommentsSection post={post} />
     </div>
   );
 };
