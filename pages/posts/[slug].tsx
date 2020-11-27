@@ -56,7 +56,7 @@ const getPost = async (slug: string) => {
 export const getStaticProps = async ({ params }) => {
   const posts = await getPost(params.slug);
   return {
-    props: { posts },
+    props: { posts }
   };
 };
 

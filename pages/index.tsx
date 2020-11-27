@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles/Home.module.scss';
+import PostList from './components/homePage/postList';
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env;
 
@@ -24,15 +25,7 @@ const Home: React.FC<Props> = props => {
   return (
     <div className={styles.container}>
       <h1>My Blog</h1>
-      <ul>
-        {posts.map(({ title, id, slug, custom_excerpt }) => (
-          <li key={id}>
-            <Link href={`/posts/${slug}`}>
-              <a>{title}</a>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <PostList posts={posts}/>
     </div>
   );
 };
