@@ -3,10 +3,18 @@ import { useRouter } from 'next/router';
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env;
 
+interface Props {
+  posts: {
+    posts: {
+      title: string;
+      html: string;
+    }[];
+  };
+}
 
-const Post = props => {
-  let post = props.posts;
-  post = post.posts[0];
+const Post: React.FC<Props> = props => {
+  const post = props.posts.posts[0];
+
   const router = useRouter();
   if (router.isFallback) {
     return <h2>Loading...</h2>;
@@ -17,7 +25,7 @@ const Post = props => {
       <Link href="/">
         <a>Go back</a>
       </Link>
-  <h1>{post.title}</h1>
+      <h1>{post.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
     </div>
   );
