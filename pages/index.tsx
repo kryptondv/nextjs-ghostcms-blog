@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.scss';
 
-const {BLOG_URL, CONTENT_API_KEY} = process.env
+const { BLOG_URL, CONTENT_API_KEY } = process.env;
 
-type Post = {};
+interface Props {
+  posts: { posts: { title: string; id: string }[] };
+}
 
 const getPosts = async () => {
   let res = await fetch(
@@ -20,8 +22,22 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-const Home: React.FC<{ posts: Post[] }> = props => {
-  return <div className={styles.container}></div>;
+const Home: React.FC<Props> = props => {
+  console.log(props);
+  const {
+    posts: { posts },
+  } = props;
+
+  return (
+    <div className={styles.container}>
+      <h1>My Blog</h1>
+      <ul>
+        {posts.map(({ title, id }) => (
+          <li key={id}>{title}</li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 export default Home;
