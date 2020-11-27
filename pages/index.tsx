@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import styles from '../styles/Home.module.scss';
 import PostList from './components/homePage/postList';
 
@@ -16,16 +15,23 @@ interface Props {
   };
 }
 
-
 const Home: React.FC<Props> = props => {
   const {
     posts: { posts },
   } = props;
-  
+
   return (
     <div className={styles.container}>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="First next js blog"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
       <h1>My Blog</h1>
-      <PostList posts={posts}/>
+      <PostList posts={posts} />
     </div>
   );
 };
