@@ -36,8 +36,7 @@ const Post: React.FC<Props> = props => {
         <a>Go back</a>
       </Link>
       <PostContent title={post.title} html={post.html}/>
-      <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
+      
       {!comments && (
         <button onClick={() => setComments(true)}>Load Comments</button>
       )}
