@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import PostPreview from '../postPreview';
 
 interface Props {
   posts: { title: string; id: string; slug: string; custom_excerpt: string }[];
@@ -11,7 +12,9 @@ const PostList: React.FC<Props> = props => {
       {posts.map(({ title, id, slug, custom_excerpt }) => (
         <li key={id}>
           <Link href={`/posts/${slug}`}>
-            <a>{title}</a>
+            <a>
+              <PostPreview title={title} excerpt={custom_excerpt} />
+            </a>
           </Link>
         </li>
       ))}
