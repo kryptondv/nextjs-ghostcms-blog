@@ -1,15 +1,23 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from '../styles/Home.module.scss';
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env;
 
 interface Props {
-  posts: { posts: { title: string; id: string }[] };
+  posts: {
+    posts: {
+      title: string;
+      id: string;
+      slug: string;
+      custom_excerpt: string;
+    }[];
+  };
 }
 
 const getPosts = async () => {
   let res = await fetch(
-    `${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}`
+    `${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug,custom_excerpt,id`
   );
   res = await res.json();
   return res;
@@ -32,8 +40,12 @@ const Home: React.FC<Props> = props => {
     <div className={styles.container}>
       <h1>My Blog</h1>
       <ul>
-        {posts.map(({ title, id }) => (
-          <li key={id}>{title}</li>
+        {posts.map(({ title, id, slug, custom_excerpt }) => (
+          <li key={id}>
+            <Link href={`/posts/${slug}`}>
+              <a>{title}</a>
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
