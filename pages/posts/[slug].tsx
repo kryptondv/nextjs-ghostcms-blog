@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import CommentsSection from '../components/postPage/commentsSection';
+import CommentsSection from 'components/postPage/commentsSection';
 
-import PostContent from '../components/postPage/postContent';
+import PostContent from 'components/postPage/postContent';
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env;
 

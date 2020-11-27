@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.scss';
-import PostList from './components/homePage/postList';
+import styles from 'styles/Home.module.scss';
+import PostList from 'components/homePage/postList';
 
 const { BLOG_URL, CONTENT_API_KEY } = process.env;
 

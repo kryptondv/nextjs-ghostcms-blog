@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import PostPreview from '../postPreview';
+import PostPreview from 'components/homePage/postPreview';
 
 interface Props {
   posts: { title: string; id: string; slug: string; custom_excerpt: string }[];

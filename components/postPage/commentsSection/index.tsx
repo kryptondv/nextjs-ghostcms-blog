@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { loadComments } from '../../../../utils/disqs';
+import { loadComments } from 'utils/disqs';
 
 interface Props {
   post: object
