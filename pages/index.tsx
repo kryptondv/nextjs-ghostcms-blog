@@ -15,27 +15,12 @@ interface Props {
   };
 }
 
-const getPosts = async () => {
-  let res = await fetch(
-    `${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug,custom_excerpt,id`
-  );
-  res = await res.json();
-  return res;
-};
-
-export const getStaticProps = async ({ params }) => {
-  const posts = await getPosts();
-  return {
-    props: { posts },
-  };
-};
 
 const Home: React.FC<Props> = props => {
-  console.log(props);
   const {
     posts: { posts },
   } = props;
-
+  
   return (
     <div className={styles.container}>
       <h1>My Blog</h1>
@@ -53,3 +38,18 @@ const Home: React.FC<Props> = props => {
 };
 
 export default Home;
+
+const getPosts = async () => {
+  let res = await fetch(
+    `${BLOG_URL}/ghost/api/v3/content/posts/?key=${CONTENT_API_KEY}&fields=title,slug,custom_excerpt,id`
+  );
+  res = await res.json();
+  return res;
+};
+
+export const getStaticProps = async () => {
+  const posts = await getPosts();
+  return {
+    props: { posts },
+  };
+};
