@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { loadComments } from '../../utils/disqs';
 
+import PostContent from '../components/postPage/postContent';
+
 const { BLOG_URL, CONTENT_API_KEY } = process.env;
 
 interface Props {
@@ -33,6 +35,7 @@ const Post: React.FC<Props> = props => {
       <Link href="/">
         <a>Go back</a>
       </Link>
+      <PostContent title={post.title} html={post.html}/>
       <h1>{post.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
       {!comments && (
@@ -56,7 +59,7 @@ const getPost = async (slug: string) => {
 export const getStaticProps = async ({ params }) => {
   const posts = await getPost(params.slug);
   return {
-    props: { posts }
+    props: { posts },
   };
 };
 
